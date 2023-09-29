@@ -40,12 +40,12 @@ public class LoadsTests
         // act
         var response = await _client.GetAsync("/api/loads/100");
 
-// verify
-response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+        // verify
+        response.StatusCode.Should().Be(HttpStatusCode.NotFound);
     }
 
     [Fact]
-    public async Task Posting_With_Empty_Body_Should_Return_Bad_Request()
+    public async Task Post_With_Empty_Body_Should_Return_Bad_Request()
     {
         // act
         var response = await _client.PostAsync("/api/loads", null);
