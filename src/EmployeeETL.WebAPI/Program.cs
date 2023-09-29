@@ -1,5 +1,7 @@
+using EmployeeETL.WebAPI.Endpoints;
 using EmployeeETL.WebAPI.OpenApi;
 using EmployeeETL.WebAPI.Versioning;
+using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 

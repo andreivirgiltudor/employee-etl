@@ -1,5 +1,7 @@
-using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 
+namespace EmployeeETL.WebAPI.Endpoints;
 public static class LoadEndpoints
 {
 private const string GetLoadsV1Endpoint = "GetLoadsV1";
