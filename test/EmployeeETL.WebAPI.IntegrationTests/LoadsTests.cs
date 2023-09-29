@@ -48,7 +48,7 @@ public class LoadsTests
     public async Task Post_With_Empty_Body_Should_Return_Bad_Request()
     {
         // act
-        var response = await _client.PostAsync("/api/loads", null);
+        var response = await _client.PostAsync("/api/loads/csv", null);
 
         // verify
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
