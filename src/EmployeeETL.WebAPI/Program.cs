@@ -1,7 +1,10 @@
+using EmployeeETL.WebAPI.Versioning;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.ConfigureVersions();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
@@ -16,5 +19,5 @@ if (app.Environment.IsDevelopment())
 // app.UseHttpsRedirection();
 // app.UseAuthorization();
 // app.MapControllers();
-app.MapLoadEndpoints();
+app.MapLoadV1Endpoints();
 app.Run();
