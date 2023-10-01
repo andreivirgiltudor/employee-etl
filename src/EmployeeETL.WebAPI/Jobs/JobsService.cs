@@ -48,7 +48,7 @@ public class JobsService : IJobsService
             await _repository.UpdateAsync(job);
             using var csvFileStream = new StreamReader(job.FilePath);
             using var csvReader = new CsvReader(csvFileStream, CultureInfo.InvariantCulture);
-            var records = csvReader.GetRecords<CsvReader>();
+            var records = csvReader.GetRecords<CsvRecord>();
             job.Processed();
             await _repository.UpdateAsync(job);
         }
