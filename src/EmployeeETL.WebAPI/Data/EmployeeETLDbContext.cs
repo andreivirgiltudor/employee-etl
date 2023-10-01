@@ -1,5 +1,5 @@
 using EmployeeETL.Data.Configurations;
-using EmployeeETL.Jobs;
+using EmployeeETL.ETL;
 using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeETL.Data;

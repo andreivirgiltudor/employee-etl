@@ -36,7 +36,7 @@ public class BackgroundJobsProcessor : BackgroundService
             catch (Exception e)
             {
                 _logger.LogError("Failed processing background task: {Message}", e.Message);
-                throw e;
+                throw;
             }
         }
     }

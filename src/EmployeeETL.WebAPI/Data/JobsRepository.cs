@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EmployeeETL.Jobs;
+using EmployeeETL.ETL;
 using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeETL.Data;

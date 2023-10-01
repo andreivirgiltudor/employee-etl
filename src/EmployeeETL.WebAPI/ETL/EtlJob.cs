@@ -1,6 +1,6 @@
 using System;
 
-namespace EmployeeETL.Jobs;
+namespace EmployeeETL.ETL;
 
 public class EtlJob
 {

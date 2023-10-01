@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace EmployeeETL.Jobs;
+namespace EmployeeETL.ETL;
 
 public enum JobStatus
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace EmployeeETL.Jobs;
+namespace EmployeeETL.ETL;
 
 public interface IJobsService {
     Task<IEnumerable<EtlJob>> GetAllJobsAsync();

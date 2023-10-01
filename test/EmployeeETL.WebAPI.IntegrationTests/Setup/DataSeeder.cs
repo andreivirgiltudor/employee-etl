@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using EmployeeETL.Data;
-using EmployeeETL.Jobs;
+using EmployeeETL.ETL;
 
 namespace EmployeeETL.WebAPI.IntegrationTests.setup;
 

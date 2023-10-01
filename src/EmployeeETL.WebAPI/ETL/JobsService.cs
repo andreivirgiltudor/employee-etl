@@ -6,15 +6,19 @@ using System.Threading;
 using System.Threading.Tasks;
 using CsvHelper;
 
-namespace EmployeeETL.Jobs;
+namespace EmployeeETL.ETL;
 
 public class JobsService : IJobsService
 {
     private readonly IJobsRepository _repository;
+    private readonly TransformService _transformer;
+    private readonly IEmployeeLoader _loader;
 
-    public JobsService(IJobsRepository repository)
+    public JobsService(IJobsRepository repository, TransformService transformService, IEmployeeLoader employeeLoader)
     {
         _repository = repository;
+        _transformer = transformService;
+        _loader = employeeLoader;
     }
 
     public async Task<IEnumerable<EtlJob>> GetAllJobsAsync()
@@ -40,15 +44,19 @@ public class JobsService : IJobsService
 
     public async Task ProcessJobAsync(EtlJob job, CancellationToken token)
     {
-        // Use cancelation token to cancel processing for records
-        // when cancel signal recieved.
         try
         {
             job.StartedProcessing();
             await _repository.UpdateAsync(job);
             using var csvFileStream = new StreamReader(job.FilePath);
             using var csvReader = new CsvReader(csvFileStream, CultureInfo.InvariantCulture);
-            var records = csvReader.GetRecords<CsvRecord>();
+            // Use cancelation token to cancel processing for records
+            // when cancel signal recieved.
+            foreach (var record in csvReader.GetRecords<CsvRecord>())
+            {
+                var employee = _transformer.Map(record);
+                await _loader.LoadAsync(employee);
+            }
             job.Processed();
             await _repository.UpdateAsync(job);
         }
@@ -60,4 +68,3 @@ public class JobsService : IJobsService
         }
     }
 }
-
