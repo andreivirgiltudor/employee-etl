@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -6,6 +6,7 @@
 
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <UserSecretsId>07aad446-878f-4269-b707-c230560534b8</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,6 +26,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\EmployeeETL.WebAPI\EmployeeETL.WebAPI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="SampleData/CSV/empty.csv" CopyToOutputDirectory="Always" />
+    <None Update="SampleData/CSV/valid.csv" CopyToOutputDirectory="Always" />
   </ItemGroup>
 
 </Project>
