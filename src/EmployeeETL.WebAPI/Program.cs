@@ -12,6 +12,7 @@ builder
     .ConfigureSwagger()
     .ConfigureStorage("EmployeeETLContext")
     .ConfigureServices()
+    .ConfigureHostedServices()
     ;
 var app = builder.Build();
 

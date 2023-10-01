@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using CsvHelper;
 
@@ -37,8 +38,10 @@ public class JobsService : IJobsService
         return etlJob;
     }
 
-    public async Task ProcessJob(EtlJob job)
+    public async Task ProcessJobAsync(EtlJob job, CancellationToken token)
     {
+        // Use cancelation token to cancel processing for records
+        // when cancel signal recieved.
         try
         {
             job.StartedProcessing();

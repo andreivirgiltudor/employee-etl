@@ -1,3 +1,4 @@
+using EmployeeETL.BackgroundServices;
 using EmployeeETL.Jobs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +11,18 @@ public static class DependencyREsolutionConfigurator
     {
 
         builder.Services.AddScoped<IJobsService, JobsService>();
+        builder.Services.AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>();
 
         return builder;
     }
+
+    public static WebApplicationBuilder ConfigureHostedServices(this WebApplicationBuilder builder)
+    {
+        // Register as many as processors count (Environment.ProcessorCount) instances
+        // to scale out the load.
+        builder.Services.AddHostedService<BackgroundJobsProcessor>();
+        return builder;
+    }
+
+
 }

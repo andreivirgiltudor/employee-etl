@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using EmployeeETL.BackgroundServices;
 using EmployeeETL.DTOs;
 using EmployeeETL.Jobs;
 using Microsoft.AspNetCore.Builder;
@@ -52,7 +53,10 @@ public static class LoadEndpoints
         .MapToApiVersion(1.0)
         ;
 
-        jobsEndpoints.MapPost("/csv", async Task<Results<AcceptedAtRoute<EtlJobDto>, BadRequest>>(IFormFile importFile, IJobsService jobsSerive) =>
+        jobsEndpoints.MapPost("/csv", async Task<Results<AcceptedAtRoute<EtlJobDto>, BadRequest>> (
+            IFormFile importFile,
+            IJobsService jobsSerive,
+            IBackgroundTaskQueue backgroundTaskQueue) =>
         {
             if (importFile.Length == 0)
                 return TypedResults.BadRequest();
@@ -64,7 +68,11 @@ public static class LoadEndpoints
             }
 
             var job = await jobsSerive.CreateNewCSVJobAsync(csvFilePath);
-            await jobsSerive.ProcessJob(job);
+            backgroundTaskQueue.Enqueue(async (token) =>
+            {
+                await jobsSerive.ProcessJobAsync(job, token);
+            });
+
             return TypedResults.AcceptedAtRoute(job.ToDto(), GetJobV1Endpoint, new { id = job.Id });
 
 
