@@ -51,7 +51,7 @@ public class JobsService : IJobsService
             using var csvFileStream = new StreamReader(job.FilePath);
             using var csvReader = new CsvReader(csvFileStream, CultureInfo.InvariantCulture);
             // Use cancelation token to cancel processing for records
-            // when cancel signal recieved.
+            // when cancel/stop signal recieved.
             foreach (var record in csvReader.GetRecords<CsvRecord>())
             {
                 var employee = _transformer.Map(record);

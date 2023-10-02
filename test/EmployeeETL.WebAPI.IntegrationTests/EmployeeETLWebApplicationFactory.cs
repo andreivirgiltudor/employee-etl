@@ -27,7 +27,9 @@ public class EmployeeETLWebApplicationFactory : WebApplicationFactory<Program>
         builder.ConfigureTestServices(builder =>
         {
             builder.RemoveAll(typeof(DbContextOptions<EmployeeETLContext>));
+            builder.RemoveAll(typeof(DbContextOptions<EmployeeHRContext>));
             builder.AddSqlServer<EmployeeETLContext>(_configuration.GetConnectionString("EmployeeETLContext"));
+            builder.AddSqlServer<EmployeeHRContext>(_configuration.GetConnectionString("EmployeeHRContext"));
 
             var serviceProvider = builder.BuildServiceProvider();
             var scope = serviceProvider.CreateScope();

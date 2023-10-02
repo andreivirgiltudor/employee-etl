@@ -44,3 +44,46 @@ docker-compose down
 ```
 
 Now you're good to go. Enjoy!
+
+# CE MAI AM DE FACUT
+- de documentat user secrets pentru web api si pentru proiectul de test
+- schimbari de facut
+-- authentificare si autorizare
+-- exceptions handler
+-- generalizat extractorul sa suporte extrageri din mai multe formate
+-- pus storage-ul pentru job-uri in afara SQL
+-- scale out cu joburi efemere prin AZ functions
+
+
+ConnectionStrings:EmployeeETLContext = Server=localhost; Database=EmployeeETL; User Id=sa; Password=s3trio64v+;TrustServerCertificate=True
+ConnectionStrings:EmployeeHRContext = Server=localhost; Database=EmployeeHR; User Id=sa; Password=s3trio64v+;TrustServerCertificate=True
+
+
+            // try
+            // {
+            //     var csvFilePath = Path.GetTempFileName();
+            //     using (var csvFileStream = File.OpenWrite(csvFilePath))
+            //     {
+            //         await importFile.CopyToAsync(csvFileStream);
+            //     }
+
+            //     var job = EtlJob.ANewCsvJob(csvFilePath);
+            //     _jobs.Add(job);
+
+            //     return Results.Accepted();
+            // }
+            // catch (Exception e)
+            // {
+            //     return Results.Problem(e.Message);
+            // }
+
+            // using (var csvFileStream = new StreamReader(csvFilePath))
+            // {
+            //     using var csvReader = new CsvReader(csvFileStream, CultureInfo.InvariantCulture);
+            //     var records = csvReader.GetRecords<CsvRecord>();
+            //     foreach (var record in records)
+            //     {
+            //         var employeeDto = new EmployeeDTO(record.EmployeeID, record.FirstName, record.LastName, record.DateOfBirth, record.GrossAnnualSalary);
+            //         _employee.Add(employeeDto);
+            //     }
+            // }

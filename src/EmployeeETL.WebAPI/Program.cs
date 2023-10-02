@@ -10,7 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder
     .ConfigureVersions()
     .ConfigureSwagger()
-    .ConfigureStorage("EmployeeETLContext")
+    .ConfigureETLStorage("EmployeeETLContext")
+    .ConfigureHRStorage("EmployeeHRContext")
     .ConfigureServices()
     .ConfigureHostedServices()
     ;

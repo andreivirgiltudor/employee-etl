@@ -10,13 +10,22 @@ namespace EmployeeETL.Data;
 
 public static class DataConfigurator
 {
-    public static WebApplicationBuilder ConfigureStorage(this WebApplicationBuilder builder, string connectionStringName)
+    public static WebApplicationBuilder ConfigureETLStorage(this WebApplicationBuilder builder, string connectionStringName)
     {
         var connectionString = builder.Configuration.GetConnectionString(connectionStringName);
         builder.Services
             .AddSqlServer<EmployeeETLContext>(connectionString)
             .AddScoped<IJobsRepository, JobsRepository>();
 
+        return builder;
+    }
+
+    public static WebApplicationBuilder ConfigureHRStorage(this WebApplicationBuilder builder, string connectionStringName)
+    {
+        var connectionString = builder.Configuration.GetConnectionString(connectionStringName);
+        builder.Services.
+            AddSqlServer<EmployeeHRContext>(connectionString)
+            .AddScoped<IEmployeeLoader, EmployeeLoader>();
         return builder;
     }
 

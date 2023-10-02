@@ -19,4 +19,3 @@ public class EmployeeETLContext : DbContext
 
     }
 }
-
